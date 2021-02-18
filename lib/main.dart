@@ -1,134 +1,180 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+List<Color> colors = [
+  Colors.red,
+  Colors.amber,
+  Colors.lightGreenAccent,
+  Colors.lightBlue,
+  Colors.pink,
+  Colors.deepOrange,
+];
+final days = [
+  'Senin',
+  'Selasa',
+  'Rabu',
+  'Kamis',
+  'Jumat',
+  'Sabtu',
+];
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  List<Color> colors = [
-    Colors.yellow,
-    Colors.blue,
-    Colors.grey,
-    Colors.red,
-    Colors.blueAccent,
-    Colors.brown,
-  ];
-  List<String> nama = [
-    'naila',
-    'sisil',
-    'siska',
-    'suci',
-    'igis',
-    'nanda',
-  ];
-  List<String> nama2 = [
-    'ajay',
-    'qaysa',
-    'alfi',
-    'rafli',
-    'irsyad',
-    'farel',
-    'hilmi',
-    'parhan',
-    'angsam',
-    'agung',
-    'eka',
-    'santia',
-  ];
-  List<Color> warna = [
-    Colors.green,
-    Colors.red,
-    Colors.purple,
-    Colors.red,
-    Colors.blueAccent,
-    Colors.brown,
-    Colors.pink,
-    Colors.blue,
-    Colors.grey,
-    Colors.red,
-    Colors.lime,
-    Colors.brown,
-  ];
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Basic Flutter',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.blue,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('ListView'),
+        ),
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 200,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: colors.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: new EdgeInsets.all(5),
-                            width: 150,
-                            height: 80,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 200,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        height: 150,
+                        width: 200,
+                        child: Card(
+                          color: Colors.blueGrey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              new SvgPicture.asset(
+                                'assets/icons/fast-food.svg',
+                                height: 100,
+                                width: 100,
+                                allowDrawingOutsideViewBox: true,
+                              ),
+                              new Text('Menu utama',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        height: 150,
+                        width: 200,
+                        child: Card(
+                          color: Colors.blueGrey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              new SvgPicture.asset(
+                                'assets/icons/diet.svg',
+                                height: 100,
+                                width: 100,
+                                allowDrawingOutsideViewBox: true,
+                              ),
+                              new Text('Menu Utama',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                new Center(
+                  child: Text('List Menu',
+                      style: TextStyle(fontSize: 20, color: Colors.black)),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 10),
+                  height: 240,
+                  width: 400,
+                  margin: EdgeInsets.all(6),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: colors.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: 180,
+                          margin: EdgeInsets.all(6),
+                          child: Card(
                             color: colors[index],
-                            child: Center(
-                              child: Text(nama[index]),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Center(
+                                  child: Text(days[index],
+                                      style: TextStyle(fontSize: 20)),
+                                ),
+                                SvgPicture.asset(
+                                  'assets/icons/menu.svg',
+                                  height: 140,
+                                  width: 150,
+                                  alignment: Alignment.bottomCenter,
+                                )
+                              ],
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      }),
+                ),
+                Container(
+                  height: 100,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    children: List.generate(1, (index) {
+                      return Container(
+                        child: Card(
+                          color: Colors.lightGreenAccent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/diet.svg',
+                                height: 200,
+                                width: 200,
+                                alignment: Alignment.topCenter,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
                   ),
-                  Padding(padding: const EdgeInsets.all(10)),
-                  Container(
-                    height: 200,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: colors.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: new EdgeInsets.all(5),
-                            width: 150,
-                            height: 80,
-                            color: colors[index],
-                            child: Center(
-                              child: Text(nama[index]),
-                            ),
-                          );
-                        }),
+                ),
+                Container(
+                  height: 100,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    children: List.generate(1, (index) {
+                      return Container(
+                        child: Card(
+                          color: Colors.lightGreenAccent,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SvgPicture.asset(
+                                'assets/icons/diet.svg',
+                                height: 200,
+                                width: 200,
+                                alignment: Alignment.topCenter,
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
                   ),
-                  Padding(padding: const EdgeInsets.all(100)),
-                  Container(
-                    height: 80,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: colors.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: new EdgeInsets.all(5),
-                            width: 70,
-                            height: 80,
-                            color: colors[index],
-                            child: Center(
-                              child: Text(nama[index]),
-                            ),
-                          );
-                        }),
-                  ),
-                  Container(
-                    height: 80,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: warna.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: new EdgeInsets.all(5),
-                            width: 70,
-                            height: 80,
-                            color: warna[index],
-                            child: Center(
-                              child: Text(nama2[index]),
-                            ),
-                          );
-                        }),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
